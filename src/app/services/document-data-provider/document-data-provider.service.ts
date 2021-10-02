@@ -37,6 +37,7 @@ export class DocumentDataProvider {
     doc.secrecy = Secrecy.TOP_SECRET;
     doc.type = ApplicationDocumentType.INTERNAL;
     doc.signatures = [this._userMocks.getUser('ivanov'), this._userMocks.getUser('bashirov')];
+    doc.id = '1';
     this._documents.push(doc);
 
     doc = new ApplicationDocument();
@@ -45,11 +46,12 @@ export class DocumentDataProvider {
     doc.body = 'Eat some more of these soft French buns and drink some tea. Eat some more of these soft French buns and drink some tea.' +
       ' Eat some more of these soft French buns and drink some tea.';
     doc.createDate =  new Date (Date.now());
-    doc.header = 'Global Document Number 1';
+    doc.header = 'Public Doc #42';
     doc.priority = ApplicationDocumentPriority.GREEN;
     doc.secrecy = Secrecy.PUBLIC_USE;
     doc.type = ApplicationDocumentType.EXTERNAl;
     doc.state =  ApplicationDocumentState.REJECTED;
+    doc.id = '42';
     doc.signatures = [this._userMocks.getUser('petrov'), this._userMocks.getUser('sidorov'), this._userMocks.getUser('vasechkin')];
     this._documents.push(doc);
 
