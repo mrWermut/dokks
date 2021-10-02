@@ -7,6 +7,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
 import { DocumentFormComponent } from './components/document-form/document-form.component';
 import { DataListComponent } from './components/data-list/data-list.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
+import { MainWindowComponent } from './components/main-window/main-window.component';
 
 @NgModule({
   declarations: [
@@ -14,11 +17,14 @@ import { DataListComponent } from './components/data-list/data-list.component';
     NavbarComponent,
     LoginComponent,
     DocumentFormComponent,
-    DataListComponent
+    DataListComponent,
+    MainWindowComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NoopAnimationsModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
