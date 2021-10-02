@@ -12,6 +12,9 @@ import { MainWindowComponent } from './components/main-window/main-window.compon
 import { ApplicationDocumentFormComponent } from './components/application-document-form/application-document-form.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,11 @@ import { MatButtonModule } from '@angular/material/button';
     NoopAnimationsModule,
     MatTableModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

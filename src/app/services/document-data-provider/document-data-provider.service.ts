@@ -49,7 +49,7 @@ export class DocumentDataProvider {
     doc.header = 'Public Doc #42';
     doc.priority = ApplicationDocumentPriority.GREEN;
     doc.secrecy = Secrecy.PUBLIC_USE;
-    doc.type = ApplicationDocumentType.EXTERNAl;
+    doc.type = ApplicationDocumentType.EXTERNAL;
     doc.state =  ApplicationDocumentState.REJECTED;
     doc.id = '42';
     doc.signatures = [this._userMocks.getUser('petrov'), this._userMocks.getUser('sidorov'), this._userMocks.getUser('vasechkin')];

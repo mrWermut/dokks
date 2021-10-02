@@ -1,9 +1,22 @@
+<div style="width: 800px; height: 600px" >
+  <mat-dialog-content class="mat-typography">
 
-<mat-dialog-content class="mat-typography">
-  {{initialData | json}}
+    <form [formGroup]="documentFormGroup" >
 
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true"  >Submit</button>
-</mat-dialog-actions>
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Document header</mat-label>
+        <input matInput placeholder="Ex. Pizza" formControlName="header">
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Explain your case</mat-label>
+        <textarea matInput placeholder="..." formControlName="body"></textarea>
+      </mat-form-field>
+    </form>
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true"  >Submit</button>
+  </mat-dialog-actions>
+</div>
