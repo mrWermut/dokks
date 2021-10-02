@@ -1,5 +1,5 @@
 
-export class Credentials {
+export class UserDetails {
   firstName: string;
   middleName: string;
   lastName: string;
@@ -10,6 +10,4 @@ export class Credentials {
     this.lastName = lastName;
   }
 
-  get fullName() {
-    return `${this?.lastName} ${this?.firstName} ${this?.middleName}`;
-  }
+}
