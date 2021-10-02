@@ -17,7 +17,6 @@ export class DataListComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['position', 'header', 'date'];
   dataSource = [];
 
-
   @Output()
   rowSelected: EventEmitter<ApplicationDocument> = new EventEmitter<ApplicationDocument>();
 
@@ -28,13 +27,12 @@ export class DataListComponent implements OnInit, OnDestroy {
           this.dataSource = s;
         }
      );
-
   }
 
   rowClicked = (el: ApplicationDocument) => {
     this.currentRow = el;
     this.rowSelected.emit(el);
-  };
+  }
 
   ngOnInit(): void {
   }

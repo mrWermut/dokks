@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ApplicationDocument} from '../../shared/models/application-document';
+import {MatDialog} from '@angular/material/dialog';
+import {ApplicationDocumentFormComponent} from '../application-document-form/application-document-form.component';
 
 @Component({
   selector: 'app-main-window',
@@ -8,11 +10,16 @@ import {ApplicationDocument} from '../../shared/models/application-document';
 })
 export class MainWindowComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
 
   rowSelected = (doc: ApplicationDocument) => {
     console.log(doc);
+
+    this.dialog.open(ApplicationDocumentFormComponent, {
+      data:  doc,
+      disableClose: true
+    });
 
   }
 

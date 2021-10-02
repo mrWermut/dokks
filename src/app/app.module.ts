@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -10,6 +9,9 @@ import { DataListComponent } from './components/data-list/data-list.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MainWindowComponent } from './components/main-window/main-window.component';
+import { ApplicationDocumentFormComponent } from './components/application-document-form/application-document-form.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -18,13 +20,16 @@ import { MainWindowComponent } from './components/main-window/main-window.compon
     LoginComponent,
     DocumentFormComponent,
     DataListComponent,
-    MainWindowComponent
+    MainWindowComponent,
+    ApplicationDocumentFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NoopAnimationsModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
