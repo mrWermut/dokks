@@ -27,7 +27,8 @@ export enum ApplicationDocumentType {
 export enum ApplicationDocumentState {
   CREATED,
   PROCESSING,
-  DONE
+  CONFIRMED,
+  REJECTED
 }
 
 export enum UserPermissions {

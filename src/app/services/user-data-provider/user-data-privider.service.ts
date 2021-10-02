@@ -16,7 +16,7 @@ import {UserDetails} from '../../shared/models/user-details';
 export class UserDataPrividerService {
 
 
-  private _users: Array<User>;
+  private _users: Array<User> = [];
 
   private _groups = new Map<UserGroupRole, UserGroup>();
 

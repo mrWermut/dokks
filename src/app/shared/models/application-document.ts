@@ -15,9 +15,7 @@ export class ApplicationDocument {
   secrecy: Secrecy;
   executive: User;
   signatures: Array<User>;
+  id: string;
 
-  constructor(
-  ) {
-
-  }
 }
+
