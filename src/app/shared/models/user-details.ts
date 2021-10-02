@@ -13,4 +13,3 @@ export class Credentials {
   get fullName() {
     return `${this?.lastName} ${this?.firstName} ${this?.middleName}`;
   }
-}

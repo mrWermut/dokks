@@ -5,29 +5,30 @@ export enum Secrecy {
   PUBLIC_USE
 }
 
-export enum  ApplicationFormPriority {
+export enum  ApplicationDocumentPriority {
   RED,
   ORANGE,
   YELLOW,
   GREEN
 }
 
-export enum ApplicationScope {
+export enum ApplicationDocumentScope {
   GLOBAL,
   FEDERAl,
   REGIONAL
 
 }
 
-export enum ApplicationFormType {
+export enum ApplicationDocumentType {
   INTERNAL,
   EXTERNAl
 }
 
-export enum ApplicationFormState {
+export enum ApplicationDocumentState {
   CREATED,
   PROCESSING,
-  DONE
+  CONFIRMED,
+  REJECTED
 }
 
 export enum UserPermissions {
@@ -36,4 +37,10 @@ export enum UserPermissions {
    EDIT,
    REJECT,
    LOGIN
+}
+
+export enum UserGroupRole {
+  INITIATOR,
+  EDITOR,
+  CONFIRMER
 }
