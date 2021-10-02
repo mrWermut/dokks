@@ -1,5 +1,5 @@
 
-export enum  Secrecy {
+export enum Secrecy {
   TOP_SECRET,
   SECRET,
   PUBLIC_USE

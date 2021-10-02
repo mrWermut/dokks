@@ -1,5 +1,7 @@
 import {ApplicationFormPriority, ApplicationScope, Secrecy, ApplicationFormType, ApplicationFormState} from './enums';
 import {User} from './user';
+
+export class ApplicationForm {
   header?: string;
   type?: ApplicationFormType;
   state: ApplicationFormState;
@@ -11,5 +13,4 @@ import {User} from './user';
   secrecy?: Secrecy;
   executive: User;
   signatures: Array<User>;
-
 }
