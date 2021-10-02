@@ -1,5 +1,5 @@
 
-export enum Secrecy {
+export enum ApplicationDocumentSecrecy {
   TOP_SECRET = 'TOP_SECRET',
   SECRET = 'SECRET',
   PUBLIC_USE = 'PUBLIC_USE'

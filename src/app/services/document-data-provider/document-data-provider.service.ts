@@ -4,8 +4,6 @@
 * Фейковый сервис для доставки тестовых данных про документы
 * */
 import {Injectable} from '@angular/core';
-
-import {ApplicationDocumentFilter} from '../../shared/models/application-document-filter';
 import {UserDataPrividerService} from '../user-data-provider/user-data-privider.service';
 import {ApplicationDocument} from '../../shared/models/application-document';
 import {
@@ -13,9 +11,9 @@ import {
   ApplicationDocumentScope,
   ApplicationDocumentState,
   ApplicationDocumentType,
-  Secrecy
+  ApplicationDocumentSecrecy
 } from '../../shared/models/enums';
-import {Observable, of, Subject} from 'rxjs';
+import {Observable, of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,27 +26,28 @@ export class DocumentDataProvider {
 
     let doc = new ApplicationDocument();
     doc.author = _userMocks.getUser('ivanov');
-    doc.applicationScope = ApplicationDocumentScope.GLOBAL;
+    doc.scope = ApplicationDocumentScope.GLOBAL;
     doc.body = 'The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.' +
       ' The quick brown fox jumps over the lazy dog';
     doc.createDate =  new Date (Date.now());
     doc.header = 'Global Document Number 1';
     doc.priority = ApplicationDocumentPriority.ORANGE;
-    doc.secrecy = Secrecy.TOP_SECRET;
+    doc.secrecy = ApplicationDocumentSecrecy.TOP_SECRET;
     doc.type = ApplicationDocumentType.INTERNAL;
+    doc.state = ApplicationDocumentState.CREATED;
     doc.signatures = [this._userMocks.getUser('ivanov'), this._userMocks.getUser('bashirov')];
     doc.id = '1';
     this._documents.push(doc);
 
     doc = new ApplicationDocument();
     doc.author = _userMocks.getUser('petrov');
-    doc.applicationScope = ApplicationDocumentScope.REGIONAL;
+    doc.scope = ApplicationDocumentScope.REGIONAL;
     doc.body = 'Eat some more of these soft French buns and drink some tea. Eat some more of these soft French buns and drink some tea.' +
       ' Eat some more of these soft French buns and drink some tea.';
     doc.createDate =  new Date (Date.now());
     doc.header = 'Public Doc #42';
     doc.priority = ApplicationDocumentPriority.GREEN;
-    doc.secrecy = Secrecy.PUBLIC_USE;
+    doc.secrecy = ApplicationDocumentSecrecy.PUBLIC_USE;
     doc.type = ApplicationDocumentType.EXTERNAL;
     doc.state =  ApplicationDocumentState.REJECTED;
     doc.id = '42';

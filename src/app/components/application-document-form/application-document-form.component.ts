@@ -3,7 +3,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {ApplicationDocument} from '../../shared/models/application-document';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {FormGroup, FormControl, Validators, FormArray, FormBuilder} from '@angular/forms';
-import {UserGroupRole, UserPermissions, Secrecy, ApplicationDocumentPriority,
+import {UserGroupRole, UserPermissions, ApplicationDocumentSecrecy, ApplicationDocumentPriority,
   ApplicationDocumentScope , ApplicationDocumentState, ApplicationDocumentType} from '../../shared/models/enums';
 @Component({
   selector: 'app-application-document-form',
@@ -16,28 +16,34 @@ export class ApplicationDocumentFormComponent implements OnInit {
 
   userFroupRoleEnum = UserGroupRole;
   userPermissionsEnum = UserPermissions;
-  secrecyEnum = Secrecy;
+  secrecyEnum = ApplicationDocumentSecrecy;
   applicationDocumentPriorityEnum = ApplicationDocumentPriority;
   applicationDocumentScopeEnum = ApplicationDocumentScope;
   applicationDocumentStateEnum = ApplicationDocumentState;
   applicationDocumentTypeEnum = ApplicationDocumentType;
 
 
+  typeSelectOptions: Array<string>;
+
+
   constructor(@Inject(MAT_DIALOG_DATA) public currentDoc: ApplicationDocument,
               private _formBuilder: FormBuilder) {
+
+    this.typeSelectOptions = this.getEnumOptions(this.applicationDocumentTypeEnum);
+
 
 
 /*
 *
   header: string;
-  type: ApplicationDocumentType;
-  state: ApplicationDocumentState;
+
+
   createDate?: Date;
   body: string;
   author: User;
-  priority: ApplicationDocumentPriority;
-  applicationScope?: ApplicationDocumentScope;
-  secrecy: Secrecy;
+
+  scope?: ApplicationDocumentScope;
+
   executive: User;
   signatures: Array<User>;
   id: string;
@@ -48,17 +54,21 @@ export class ApplicationDocumentFormComponent implements OnInit {
       {
          header: [currentDoc.header],
          type: [ApplicationDocumentType[currentDoc.type]],
+         priority: [ApplicationDocumentPriority[currentDoc.priority]],
+         scope: [ApplicationDocumentScope[currentDoc.scope]],
+         secrecy: [ApplicationDocumentSecrecy[currentDoc.secrecy]],
+         state: [ApplicationDocumentState[currentDoc.state]],
          body: [currentDoc.body],
-         priority: [ApplicationDocumentPriority[currentDoc.priority]]
       }
     );
   }
   ngOnInit(): void {
   }
 
-  getEnumOptions = (e: UserGroupRole | UserPermissions | Secrecy |ApplicationDocumentPriority |
-                            ApplicationDocumentScope | ApplicationDocumentState | ApplicationDocumentType ) => {
-    return Object.keys(e).map( el => ({id: el, option:  el[el]}));
+  getEnumOptions = (e: any ) => {
+    return Object.keys(e);
 
   }
+
+  /* TODO: paint background based on type */
 }
