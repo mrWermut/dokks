@@ -36,19 +36,6 @@ export class ApplicationDocumentFormComponent implements OnInit {
     this.typeSelectOptions = this.getEnumOptions(this.applicationDocumentTypeEnum);
 
 
-    /*
-    *
-
-
-
-      author: User;
-
-
-      signatures: Array<User>;
-      id: string;
-
-    * */
-
     this.documentFormGroup = this._fb.group(
       {
         header: [currentDoc.header],
@@ -70,7 +57,9 @@ export class ApplicationDocumentFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currentDoc.executive = this._user.getCurrentUser();
+    console.log('docForm', this.currentDoc);
+
+
   }
 
   getEnumOptions = (e: any) => {
