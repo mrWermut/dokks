@@ -2,6 +2,21 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.basic-container{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .full-width {
   width: 100%;
 }
+.full-height {
+  height: 100%;
+}
+
+.four-fifths-width{
+  width: 80%;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { MenuBarComponent } from './components/app-menu/menu-bar.component';
 import { LoginComponent } from './components/login/login.component';
 import { DocumentFormComponent } from './components/document-form/document-form.component';
 import { DataListComponent } from './components/data-list/data-list.component';
@@ -12,16 +12,40 @@ import { MainWindowComponent } from './components/main-window/main-window.compon
 import { ApplicationDocumentFormComponent } from './components/application-document-form/application-document-form.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule} from '@angular/material/select';
+import { DocPriorityDirective } from './directives/doc-priority.directive';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {RouterModule, Routes} from '@angular/router';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
+import {UserService} from './services/user/user.service';
+import {DocumentsGuard} from './guards/documents.guard';
+
+
+const appRoutes: Routes = [
+  { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'documents', component: MainWindowComponent, canActivate: [DocumentsGuard]},
+  { path: '**', component: PageNotFoundComponent }
+];
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
+    MenuBarComponent,
     LoginComponent,
     DocumentFormComponent,
     DataListComponent,
     MainWindowComponent,
-    ApplicationDocumentFormComponent
+    ApplicationDocumentFormComponent,
+    DocPriorityDirective,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -29,9 +53,23 @@ import { MatButtonModule } from '@angular/material/button';
     NoopAnimationsModule,
     MatTableModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule,
+    FormsModule,
+    MatCardModule,
+
+    RouterModule.forRoot(
+      appRoutes),
+
+
   ],
-  providers: [],
+  providers: [UserService, DocumentsGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

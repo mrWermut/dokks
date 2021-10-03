@@ -1,4 +1,5 @@
-import {ApplicationDocumentPriority, ApplicationDocumentScope, Secrecy, ApplicationDocumentType, ApplicationDocumentState} from './enums';
+import {ApplicationDocumentPriority, ApplicationDocumentScope, ApplicationDocumentSecrecy,
+  ApplicationDocumentType, ApplicationDocumentState} from './enums';
 
 import {User} from './user';
 
@@ -11,8 +12,8 @@ export class ApplicationDocument {
   body: string;
   author: User;
   priority: ApplicationDocumentPriority;
-  applicationScope?: ApplicationDocumentScope;
-  secrecy: Secrecy;
+  scope: ApplicationDocumentScope;
+  secrecy: ApplicationDocumentSecrecy;
   executive: User;
   signatures: Array<User>;
   id: string;
