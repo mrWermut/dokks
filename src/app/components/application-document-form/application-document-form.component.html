@@ -1,9 +1,16 @@
 <div style="width: 800px; height: 600px" >
 
   <mat-dialog-content class="mat-typography">
-    <div  [appDocPriority]="currentDoc.priority" style="text-align: center"> DOCUMENT STATE: {{currentDoc.state}}  </div>
+    <div  [appDocPriority]="currentDoc.priority" style="text-align: center"> &nbsp;  </div>
 
-    {{currentDoc.type}}
+    <div  style="text-align: center">
+
+      <fa-icon style="color: blue" *ngIf="currentDoc.state === 'ACCEPTED'"  [icon]="faCheck"></fa-icon>
+      <fa-icon style="color: crimson" *ngIf="currentDoc.state === 'REJECTED'"  [icon]="faTimesCircle"></fa-icon>
+
+      {{currentDoc.state}}
+    </div>
+
     <form [formGroup]="documentFormGroup" >
 
       <mat-form-field appearance="fill">
@@ -12,10 +19,19 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
+
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Document header</mat-label>
         <input matInput placeholder="Header" formControlName="header">
       </mat-form-field>
+
+
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Explain your case</mat-label>
+        <textarea matInput placeholder="..." formControlName="body"></textarea>
+      </mat-form-field>
+
 
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Type</mat-label>
@@ -26,6 +42,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+
 
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Scope</mat-label>
@@ -38,13 +55,14 @@
 
 
       <mat-form-field class="full-width" appearance="fill">
-        <mat-label>Priority</mat-label>
-        <mat-select   formControlName="priority">
-          <mat-option *ngFor="let op of getEnumOptions(applicationDocumentPriorityEnum)" [value]="op" >
-            {{op}}
-          </mat-option>
-        </mat-select>
+      <mat-label>Priority</mat-label>
+      <mat-select   formControlName="priority">
+        <mat-option *ngFor="let op of getEnumOptions(applicationDocumentPriorityEnum)" [value]="op" >
+          {{op}}
+        </mat-option>
+      </mat-select>
       </mat-form-field>
+
 
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Secrecy</mat-label>
@@ -56,17 +74,22 @@
       </mat-form-field>
 
 
-      <mat-form-field class="full-width" appearance="fill">
-        <mat-label>Explain your case</mat-label>
-        <textarea matInput placeholder="..." formControlName="body"></textarea>
-      </mat-form-field>
 
     </form>
 
   </mat-dialog-content>
   <mat-dialog-actions align="end">
+    <ng-container *ngIf="goWild">
+      <mat-button-toggle-group [formControl]="toggleAccept" aria-label="Font Style">
+        <mat-button-toggle color="accent"  value="ACCEPTED">ACCEPT</mat-button-toggle>
+        <mat-button-toggle value="REJECTED">REJECT</mat-button-toggle>
+      </mat-button-toggle-group>
+    </ng-container>
+
+
     <button mat-button [mat-dialog-close]="true"  >Cancel</button>
     <button mat-button [mat-dialog-close]="true"  (click)="submit()"  >Submit</button>
   </mat-dialog-actions>
-  <button mat-button color="accent" (click)="doCheck()">XXX</button>
+
+
 </div>

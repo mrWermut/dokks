@@ -37,7 +37,6 @@ export class DocumentDataProvider {
     doc.type = ApplicationDocumentType.INTERNAL;
     doc.state = ApplicationDocumentState.CREATED;
     doc.signatures = [this._userMocks.getUser('ivanov'), this._userMocks.getUser('bashirov')];
-    doc.id = '1';
     this._documents.push(doc);
 
     doc = new ApplicationDocument();
@@ -51,7 +50,6 @@ export class DocumentDataProvider {
     doc.secrecy = ApplicationDocumentSecrecy.PUBLIC_USE;
     doc.type = ApplicationDocumentType.EXTERNAL;
     doc.state = ApplicationDocumentState.REJECTED;
-    doc.id = '2';
     doc.signatures = [this._userMocks.getUser('petrov'), this._userMocks.getUser('sidorov'), this._userMocks.getUser('vasechkin')];
     this._documents.push(doc);
 
