@@ -9,7 +9,7 @@ import {
 import {User} from './user';
 
 export class ApplicationDocument {
-
+/*
   header: string;
   type: ApplicationDocumentType;
   state: ApplicationDocumentState;
@@ -22,17 +22,31 @@ export class ApplicationDocument {
   executive: User;
   signatures: Array<User>;
   id: string;
+*/
+  header: string;
+  type: string;
+  state: string;
+  createDate?: Date;
+  body: string;
+  author: User;
+  priority: string;
+  scope: string;
+  secrecy: string;
+  executive: User;
+  signatures: Array<User>;
+  id: string;
+
 
   constructor(user?: User) {
     this.header = '';
-    this.type = null;
+    this.type = '';
     this.state = ApplicationDocumentState.CREATED;
     this.createDate = new Date(Date.now());
     this.body = '';
     this.author = user ? user : null;
-    this.priority = null;
-    this.scope = null;
-    this.secrecy = null;
+    this.priority = '';
+    this.scope = '';
+    this.secrecy = '';
     this.executive = user ? user : null;
     this.signatures = new Array<User>();
     if (user) { this.signatures.push(user); }

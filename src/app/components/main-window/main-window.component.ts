@@ -12,9 +12,7 @@ export class MainWindowComponent implements OnInit {
 
   constructor(public dialog: MatDialog) { }
 
-
   rowSelected = (doc: ApplicationDocument) => {
-    console.log(doc);
     this.openDialog(doc);
 
   }
@@ -27,7 +25,6 @@ export class MainWindowComponent implements OnInit {
   }
 
   openDialog = (doc?: ApplicationDocument) => {
-
     this.dialog.open(ApplicationDocumentFormComponent, {
       data:  doc,
       disableClose: true

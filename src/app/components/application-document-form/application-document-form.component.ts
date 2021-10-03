@@ -15,36 +15,30 @@ import {UserService} from '../../services/user/user.service';
   styleUrls: ['./application-document-form.component.scss']
 })
 export class ApplicationDocumentFormComponent implements OnInit {
-
   documentFormGroup: FormGroup;
-  userFroupRoleEnum = UserGroupRole;
-  userPermissionsEnum = UserPermissions;
   secrecyEnum = ApplicationDocumentSecrecy;
   applicationDocumentPriorityEnum = ApplicationDocumentPriority;
   applicationDocumentScopeEnum = ApplicationDocumentScope;
-  applicationDocumentStateEnum = ApplicationDocumentState;
   applicationDocumentTypeEnum = ApplicationDocumentType;
 
-
-  typeSelectOptions: Array<string>;
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public currentDoc: ApplicationDocument,
               private _fb: FormBuilder,
               private _user: UserService) {
 
-    this.typeSelectOptions = this.getEnumOptions(this.applicationDocumentTypeEnum);
+
 
 
     this.documentFormGroup = this._fb.group(
       {
         header: [currentDoc.header],
-        type: [ApplicationDocumentType[currentDoc.type]],
+        type: [currentDoc.type],
         createDate: [currentDoc.createDate],
-        priority: [ApplicationDocumentPriority[currentDoc.priority]],
-        scope: [ApplicationDocumentScope[currentDoc.scope]],
-        secrecy: [ApplicationDocumentSecrecy[currentDoc.secrecy]],
-        state: [ApplicationDocumentState[currentDoc.state]],
+        priority: [currentDoc.priority],
+        scope: [currentDoc.scope],
+        secrecy: [currentDoc.secrecy],
+        state: [currentDoc.state],
         body: [currentDoc.body],
         user: _fb.group(
           {}
@@ -63,7 +57,11 @@ export class ApplicationDocumentFormComponent implements OnInit {
   }
 
   getEnumOptions = (e: any) => {
-    return Object.keys(e);
+     return Object.keys(e) ;
+  }
+
+  doCheck = () => {
+    console.log ( this.documentFormGroup.value );
   }
 
 
