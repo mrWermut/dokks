@@ -4,12 +4,20 @@
 
 
   <mat-dialog-content class="mat-typography">
-
+    <div  [appDocPriority]="currentDoc.priority" style="text-align: center"> DOCUMENT STATE: {{currentDoc.state}}  </div>
     <form [formGroup]="documentFormGroup" >
+
+      <mat-form-field appearance="fill">
+        <input matInput [matDatepicker]="picker" [value]="currentDoc.createDate" formControlName="createDate" >
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+
 
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Document header</mat-label>
-        <input   matBadge="8" matBadgePosition="before" matBadgeColor="accent" matInput placeholder="Header" formControlName="header">
+        <input matInput placeholder="Header" formControlName="header">
       </mat-form-field>
 
       <mat-form-field class="full-width" appearance="fill">
