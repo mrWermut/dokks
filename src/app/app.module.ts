@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { MenuBarComponent } from './components/app-menu/menu-bar.component';
 import { LoginComponent } from './components/login/login.component';
 import { DocumentFormComponent } from './components/document-form/document-form.component';
 import { DataListComponent } from './components/data-list/data-list.component';
@@ -38,7 +38,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
+    MenuBarComponent,
     LoginComponent,
     DocumentFormComponent,
     DataListComponent,

@@ -5,11 +5,11 @@ import {User} from '../../shared/models/user';
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  selector: 'app-menu',
+  templateUrl: './menu-bar.component.html',
+  styleUrls: ['./menu-bar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class MenuBarComponent implements OnInit {
 
   currentUser: User;
   constructor( private _user: UserService,
