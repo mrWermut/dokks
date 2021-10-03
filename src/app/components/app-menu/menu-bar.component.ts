@@ -12,6 +12,8 @@ import {UserPermissions} from '../../shared/models/enums';
 })
 export class MenuBarComponent implements OnInit {
   addButtonHidden = true;
+
+
   currentUser: User;
   @Output() addDocument: EventEmitter<boolean> = new EventEmitter<boolean>();
 

@@ -1,4 +1,4 @@
 <mat-card class="example-card">
-    <div [hidden]="addButtonHidden" >  <button  mat-raised-button (click)="addDocumentClick()" color="primary">Add Document</button></div>
-    <div align="end">You are logged in as: {{currentUser.login}}<button mat-raised-button  (click)="logout()" color="accent">Logout</button></div>
+  <div [hidden]="addButtonHidden" >  <button  mat-raised-button (click)="addDocumentClick()" color="primary">Add Document</button></div>
+  <div align="end">You are logged as:  <strong style="padding: 1em">{{currentUser.login}}</strong><button mat-raised-button  (click)="logout()" color="accent">Logout</button></div>
 </mat-card>

@@ -9,7 +9,7 @@ import {
 import {User} from './user';
 
 export class ApplicationDocument {
-  static currentId = 2;
+  static currentId = 1;
   /*
     header: string;
     type: ApplicationDocumentType;

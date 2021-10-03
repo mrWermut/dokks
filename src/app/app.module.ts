@@ -25,7 +25,8 @@ import {MatCardModule} from '@angular/material/card';
 import {UserService} from './services/user/user.service';
 import {DocumentsGuard} from './guards/documents.guard';
 import {DocumentDataProvider} from './services/document-data-provider/document-data-provider.service';
-
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
@@ -62,6 +63,8 @@ const appRoutes: Routes = [
     MatIconModule,
     FormsModule,
     MatCardModule,
+    MatButtonToggleModule,
+    FontAwesomeModule,
 
     RouterModule.forRoot(
       appRoutes),
