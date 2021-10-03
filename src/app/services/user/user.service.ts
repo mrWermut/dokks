@@ -1,5 +1,5 @@
 /* tslint:disable:variable-name */
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {User} from '../../shared/models/user';
 
 
@@ -9,20 +9,25 @@ import {User} from '../../shared/models/user';
 export class UserService {
   private _currentUser: User;
 
-  constructor() { }
+  constructor() {
+  }
 
   get permissions() {
     throw  new Error('not implemented');
   }
 
   setCurrentUser(currentUser: User) {
-   this._currentUser = currentUser;
+    this._currentUser = currentUser;
   }
 
   getCurrentUser() {
     return this._currentUser;
   }
 
+  login = (login: string) => {
+
+
+  };
 
 
 }

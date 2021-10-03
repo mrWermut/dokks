@@ -22,11 +22,15 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {RouterModule, Routes} from '@angular/router';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import {MatIconModule} from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
+import {UserService} from './services/user/user.service';
+import {DocumentsGuard} from './guards/documents.guard';
+
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'documents', component: MainWindowComponent },
+  { path: 'documents', component: MainWindowComponent, canActivate: [DocumentsGuard]},
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -58,15 +62,14 @@ const appRoutes: Routes = [
     MatNativeDateModule,
     MatIconModule,
     FormsModule,
+    MatCardModule,
+
     RouterModule.forRoot(
       appRoutes),
 
 
-  ], /*
-  exports: [
-    DocPriorityDirective
-  ], */
-  providers: [],
+  ],
+  providers: [UserService, DocumentsGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

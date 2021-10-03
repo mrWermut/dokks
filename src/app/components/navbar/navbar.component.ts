@@ -1,4 +1,8 @@
+/* tslint:disable:variable-name */
 import { Component, OnInit } from '@angular/core';
+import {UserService} from '../../services/user/user.service';
+import {User} from '../../shared/models/user';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +11,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  currentUser: User;
+  constructor( private _user: UserService,
+               private _router: Router) {
 
-  ngOnInit(): void {
   }
 
+  ngOnInit(): void {
+    this.currentUser = this._user.getCurrentUser();
+  }
+
+  logout = () => {
+    this._user.setCurrentUser(null);
+    this._router.navigate(['']);
+  }
 }
