@@ -15,6 +15,18 @@ export class MainWindowComponent implements OnInit {
 
   rowSelected = (doc: ApplicationDocument) => {
     console.log(doc);
+    this.openDialog(doc);
+
+  }
+
+  ngOnInit(): void {
+  }
+
+  addDocument = () => {
+    this.openDialog(new ApplicationDocument());
+  }
+
+  openDialog = (doc?: ApplicationDocument) => {
 
     this.dialog.open(ApplicationDocumentFormComponent, {
       data:  doc,
@@ -22,9 +34,5 @@ export class MainWindowComponent implements OnInit {
     });
 
   }
-
-  ngOnInit(): void {
-  }
-
 
 }
