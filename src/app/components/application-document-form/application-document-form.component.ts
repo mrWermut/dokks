@@ -46,8 +46,9 @@ export class ApplicationDocumentFormComponent implements OnInit {
       : 'Unknown';
   }
 
-  get editMode(): boolean {
-    return this.currentUser.userGroup.name === UserGroupRole[UserGroupRole.EDITOR];
+  get canEdit(): boolean {
+    return (this.currentDoc.state !== ApplicationDocumentState.REJECTED
+      && this.currentDoc.state !== ApplicationDocumentState.CONFIRMED);
   }
 
   constructor(@Inject(MAT_DIALOG_DATA) public currentDoc: ApplicationDocument,
@@ -83,20 +84,16 @@ export class ApplicationDocumentFormComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this._user.getCurrentUser();
     this.currentDoc.executive = this.currentUser;
-    if (this.currentUser.userGroup.name === UserGroupRole.EDITOR) {
+
+    if (!this.canEdit) {
+      this.documentFormGroup.disable();
+    }
+    if (this.canEdit && this.currentUser.userGroup.name === UserGroupRole.EDITOR) {
       this.documentFormGroup.controls.state.setValue(ApplicationDocumentState.PROCESSING);
       this.currentDoc.state = ApplicationDocumentState[ApplicationDocumentState.PROCESSING];
     }
 
-
     this.checkPermissions();
-
-    if (this.currentDoc.state === ApplicationDocumentState.REJECTED ||
-      this.currentDoc.state === ApplicationDocumentState.CONFIRMED) {
-      this.documentFormGroup.disable();
-    }
-
-
   }
 
   getEnumOptions = (e: any) => {
