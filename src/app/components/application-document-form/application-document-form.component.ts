@@ -2,12 +2,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {ApplicationDocument} from '../../shared/models/application-document';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {FormGroup, FormControl, Validators, FormArray, FormBuilder} from '@angular/forms';
-import {
-  UserGroupRole, UserPermissions, ApplicationDocumentSecrecy, ApplicationDocumentPriority,
-  ApplicationDocumentScope, ApplicationDocumentState, ApplicationDocumentType
-} from '../../shared/models/enums';
+import {FormGroup,  FormBuilder} from '@angular/forms';
+import {ApplicationDocumentSecrecy, ApplicationDocumentPriority,
+  ApplicationDocumentScope, ApplicationDocumentType} from '../../shared/models/enums';
 import {UserService} from '../../services/user/user.service';
+import {DocumentDataProvider} from '../../services/document-data-provider/document-data-provider.service';
 
 @Component({
   selector: 'app-application-document-form',
@@ -22,16 +21,15 @@ export class ApplicationDocumentFormComponent implements OnInit {
   applicationDocumentTypeEnum = ApplicationDocumentType;
 
 
-
   constructor(@Inject(MAT_DIALOG_DATA) public currentDoc: ApplicationDocument,
               private _fb: FormBuilder,
-              private _user: UserService) {
-
-
+              private _user: UserService,
+              private _dataService: DocumentDataProvider) {
 
 
     this.documentFormGroup = this._fb.group(
       {
+        id: [currentDoc.id],
         header: [currentDoc.header],
         type: [currentDoc.type],
         createDate: [currentDoc.createDate],
@@ -43,26 +41,25 @@ export class ApplicationDocumentFormComponent implements OnInit {
         user: _fb.group(
           {}
         ),
-        signatures: _fb.array( []
+        signatures: _fb.array([]
         ),
         executive: [currentDoc.executive]
       }
     );
   }
 
-  ngOnInit(): void {
-    console.log('docForm', this.currentDoc);
-
-
-  }
+  ngOnInit(): void {}
 
   getEnumOptions = (e: any) => {
-     return Object.keys(e) ;
+    return Object.keys(e);
   }
 
   doCheck = () => {
-    console.log ( this.documentFormGroup.value );
+    console.log(this.documentFormGroup.value);
   }
 
-
+  submit = () => {
+    this._dataService.postDocument(this.documentFormGroup.value);
+  }
 }
+

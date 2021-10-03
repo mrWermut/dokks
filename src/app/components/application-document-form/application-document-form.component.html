@@ -65,8 +65,8 @@
 
   </mat-dialog-content>
   <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button [mat-dialog-close]="true"  >Submit</button>
+    <button mat-button [mat-dialog-close]="true"  >Cancel</button>
+    <button mat-button [mat-dialog-close]="true"  (click)="submit()"  >Submit</button>
   </mat-dialog-actions>
   <button mat-button color="accent" (click)="doCheck()">XXX</button>
 </div>

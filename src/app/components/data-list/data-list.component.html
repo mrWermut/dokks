@@ -1,19 +1,17 @@
 
 
 <div class="data-list-container">
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full-width">
+  <table mat-table #table [dataSource]="dataSource" class="mat-elevation-z8 full-width">
 
     <ng-container matColumnDef="position">
       <th mat-header-cell *matHeaderCellDef> No. </th>
       <td mat-cell *matCellDef="let el"> {{el.id}} </td>
     </ng-container>
 
-
     <ng-container matColumnDef="header">
       <th mat-header-cell *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let el"> {{el.header}} </td>
     </ng-container>
-
 
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef> CreateDate </th>

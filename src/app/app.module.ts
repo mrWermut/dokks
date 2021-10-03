@@ -24,6 +24,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {UserService} from './services/user/user.service';
 import {DocumentsGuard} from './guards/documents.guard';
+import {DocumentDataProvider} from './services/document-data-provider/document-data-provider.service';
 
 
 const appRoutes: Routes = [
@@ -67,7 +68,7 @@ const appRoutes: Routes = [
 
 
   ],
-  providers: [UserService, DocumentsGuard],
+  providers: [UserService, DocumentsGuard, DocumentDataProvider ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
