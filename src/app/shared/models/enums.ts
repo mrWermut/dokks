@@ -14,7 +14,7 @@ export enum  ApplicationDocumentPriority {
 
 export enum ApplicationDocumentScope {
   GLOBAL = 'GLOBAL',
-  FEDERAl = 'FEDERAl',
+  FEDERAL = 'FEDERAL',
   REGIONAL = 'REGIONAL'
 
 }

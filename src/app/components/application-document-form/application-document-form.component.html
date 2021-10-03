@@ -1,19 +1,16 @@
 <div style="width: 800px; height: 600px" >
 
-
-
-
   <mat-dialog-content class="mat-typography">
     <div  [appDocPriority]="currentDoc.priority" style="text-align: center"> DOCUMENT STATE: {{currentDoc.state}}  </div>
+
+    {{currentDoc.type}}
     <form [formGroup]="documentFormGroup" >
 
       <mat-form-field appearance="fill">
-        <input matInput [matDatepicker]="picker" [value]="currentDoc.createDate" formControlName="createDate" >
+        <input matInput [matDatepicker]="picker" formControlName="createDate" >
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-
-
 
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Document header</mat-label>
@@ -22,18 +19,18 @@
 
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Type</mat-label>
-        <mat-select formControlName="type">
-          <mat-option *ngFor="let op of typeSelectOptions" [value]="currentDoc.type">
+
+        <mat-select formControlName="type"   >
+          <mat-option *ngFor="let op of getEnumOptions(applicationDocumentTypeEnum)" [value]="op" >
             {{op}}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
-
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Scope</mat-label>
         <mat-select formControlName="scope">
-          <mat-option *ngFor="let op of getEnumOptions(applicationDocumentScopeEnum)" [value]="currentDoc.scope">
+          <mat-option *ngFor="let op of getEnumOptions(applicationDocumentScopeEnum)" [value]="op">
             {{op}}
           </mat-option>
         </mat-select>
@@ -42,23 +39,21 @@
 
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Priority</mat-label>
-        <mat-select formControlName="priority">
-          <mat-option *ngFor="let op of getEnumOptions(applicationDocumentPriorityEnum)" [value]="currentDoc.priority">
+        <mat-select   formControlName="priority">
+          <mat-option *ngFor="let op of getEnumOptions(applicationDocumentPriorityEnum)" [value]="op" >
             {{op}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-
 
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Secrecy</mat-label>
         <mat-select formControlName="secrecy">
-          <mat-option *ngFor="let op of getEnumOptions(secrecyEnum)" [value]="currentDoc.secrecy">
+          <mat-option *ngFor="let op of getEnumOptions(secrecyEnum)" [value]="op" >
             {{op}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-
 
 
       <mat-form-field class="full-width" appearance="fill">
@@ -70,7 +65,8 @@
 
   </mat-dialog-content>
   <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button [mat-dialog-close]="true"  >Submit</button>
+    <button mat-button [mat-dialog-close]="true"  >Cancel</button>
+    <button mat-button [mat-dialog-close]="true"  (click)="submit()"  >Submit</button>
   </mat-dialog-actions>
+  <button mat-button color="accent" (click)="doCheck()">XXX</button>
 </div>

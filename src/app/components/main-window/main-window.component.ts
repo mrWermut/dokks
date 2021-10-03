@@ -12,19 +12,24 @@ export class MainWindowComponent implements OnInit {
 
   constructor(public dialog: MatDialog) { }
 
-
   rowSelected = (doc: ApplicationDocument) => {
-    console.log(doc);
-
-    this.dialog.open(ApplicationDocumentFormComponent, {
-      data:  doc,
-      disableClose: true
-    });
+    this.openDialog(doc);
 
   }
 
   ngOnInit(): void {
   }
 
+  addDocument = () => {
+    this.openDialog(new ApplicationDocument());
+  }
+
+  openDialog = (doc?: ApplicationDocument) => {
+    this.dialog.open(ApplicationDocumentFormComponent, {
+      data:  doc,
+      disableClose: true
+    });
+
+  }
 
 }

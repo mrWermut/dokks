@@ -18,5 +18,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   width: 80%;
 }
 
+.centered-app-component{
+  display: table;
+  margin: 0 auto;
+  width: 95%;
+}
+
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

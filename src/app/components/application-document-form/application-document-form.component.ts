@@ -2,12 +2,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {ApplicationDocument} from '../../shared/models/application-document';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {FormGroup, FormControl, Validators, FormArray, FormBuilder} from '@angular/forms';
-import {
-  UserGroupRole, UserPermissions, ApplicationDocumentSecrecy, ApplicationDocumentPriority,
-  ApplicationDocumentScope, ApplicationDocumentState, ApplicationDocumentType
-} from '../../shared/models/enums';
+import {FormGroup,  FormBuilder} from '@angular/forms';
+import {ApplicationDocumentSecrecy, ApplicationDocumentPriority,
+  ApplicationDocumentScope, ApplicationDocumentType} from '../../shared/models/enums';
 import {UserService} from '../../services/user/user.service';
+import {DocumentDataProvider} from '../../services/document-data-provider/document-data-provider.service';
 
 @Component({
   selector: 'app-application-document-form',
@@ -15,67 +14,52 @@ import {UserService} from '../../services/user/user.service';
   styleUrls: ['./application-document-form.component.scss']
 })
 export class ApplicationDocumentFormComponent implements OnInit {
-
   documentFormGroup: FormGroup;
-  userFroupRoleEnum = UserGroupRole;
-  userPermissionsEnum = UserPermissions;
   secrecyEnum = ApplicationDocumentSecrecy;
   applicationDocumentPriorityEnum = ApplicationDocumentPriority;
   applicationDocumentScopeEnum = ApplicationDocumentScope;
-  applicationDocumentStateEnum = ApplicationDocumentState;
   applicationDocumentTypeEnum = ApplicationDocumentType;
-
-
-  typeSelectOptions: Array<string>;
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public currentDoc: ApplicationDocument,
               private _fb: FormBuilder,
-              private _user: UserService) {
+              private _user: UserService,
+              private _dataService: DocumentDataProvider) {
 
-    this.typeSelectOptions = this.getEnumOptions(this.applicationDocumentTypeEnum);
-
-
-    /*
-    *
-
-
-
-      author: User;
-
-
-      signatures: Array<User>;
-      id: string;
-
-    * */
 
     this.documentFormGroup = this._fb.group(
       {
+        id: [currentDoc.id],
         header: [currentDoc.header],
-        type: [ApplicationDocumentType[currentDoc.type]],
+        type: [currentDoc.type],
         createDate: [currentDoc.createDate],
-        priority: [ApplicationDocumentPriority[currentDoc.priority]],
-        scope: [ApplicationDocumentScope[currentDoc.scope]],
-        secrecy: [ApplicationDocumentSecrecy[currentDoc.secrecy]],
-        state: [ApplicationDocumentState[currentDoc.state]],
+        priority: [currentDoc.priority],
+        scope: [currentDoc.scope],
+        secrecy: [currentDoc.secrecy],
+        state: [currentDoc.state],
         body: [currentDoc.body],
         user: _fb.group(
           {}
         ),
-        signatures: _fb.array( []
+        signatures: _fb.array([]
         ),
         executive: [currentDoc.executive]
       }
     );
   }
 
-  ngOnInit(): void {
-    this.currentDoc.executive = this._user.getCurrentUser();
-  }
+  ngOnInit(): void {}
 
   getEnumOptions = (e: any) => {
     return Object.keys(e);
   }
 
+  doCheck = () => {
+    console.log(this.documentFormGroup.value);
+  }
 
+  submit = () => {
+    this._dataService.postDocument(this.documentFormGroup.value);
+  }
 }
+

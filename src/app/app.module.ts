@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuBarComponent } from './components/app-menu/menu-bar.component';
 import { LoginComponent } from './components/login/login.component';
-import { DocumentFormComponent } from './components/document-form/document-form.component';
 import { DataListComponent } from './components/data-list/data-list.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
@@ -25,6 +24,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {UserService} from './services/user/user.service';
 import {DocumentsGuard} from './guards/documents.guard';
+import {DocumentDataProvider} from './services/document-data-provider/document-data-provider.service';
 
 
 const appRoutes: Routes = [
@@ -40,7 +40,6 @@ const appRoutes: Routes = [
     AppComponent,
     MenuBarComponent,
     LoginComponent,
-    DocumentFormComponent,
     DataListComponent,
     MainWindowComponent,
     ApplicationDocumentFormComponent,
@@ -69,7 +68,7 @@ const appRoutes: Routes = [
 
 
   ],
-  providers: [UserService, DocumentsGuard],
+  providers: [UserService, DocumentsGuard, DocumentDataProvider ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
