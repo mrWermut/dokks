@@ -27,7 +27,8 @@ export enum ApplicationDocumentType {
 export enum ApplicationDocumentState {
   CREATED = 'CREATED',
   PROCESSING = 'PROCESSING',
-  CONFIRMED = 'CONFIRMED',
+  ON_CONFIRMATION = 'ON_CONFIRMATION',
+  ACCEPTED = 'ACCEPTED',
   REJECTED = 'REJECTED',
 }
 

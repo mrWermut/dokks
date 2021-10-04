@@ -14,6 +14,7 @@ import {faTimesCircle} from '@fortawesome/free-solid-svg-icons';
 import {faCheck} from '@fortawesome/free-solid-svg-icons';
 import {faFileImport} from '@fortawesome/free-solid-svg-icons';
 import {faEdit} from '@fortawesome/free-solid-svg-icons';
+import {faQuestionCircle} from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -33,22 +34,18 @@ export class ApplicationDocumentFormComponent implements OnInit {
   documentFormGroup: FormGroup;
   toggleAccept: FormControl;
 
-
+  canEdit = true;
   goWild = false;
   faCheck = faCheck;
   faTimesCircle = faTimesCircle;
   faFileImport = faFileImport;
   faEdit = faEdit;
+  faQuestionCircle = faQuestionCircle;
 
   get docAuthor() {
     return (this.currentDoc && this.currentDoc.author) ?
       `${this.currentDoc.author.userDetails.lastName} ${this.currentDoc.author.userDetails.firstName}`
       : 'Unknown';
-  }
-
-  get canEdit(): boolean {
-    return (this.currentDoc.state !== ApplicationDocumentState.REJECTED
-      && this.currentDoc.state !== ApplicationDocumentState.CONFIRMED);
   }
 
   constructor(@Inject(MAT_DIALOG_DATA) public currentDoc: ApplicationDocument,
@@ -62,6 +59,8 @@ export class ApplicationDocumentFormComponent implements OnInit {
 
     this.documentFormGroup = this._fb.group(
       {
+        author: [currentDoc.author],
+        executive: [_user.getCurrentUser()],
         id: [currentDoc.id],
         header: [currentDoc.header, [Validators.required, Validators.maxLength(500)]],
         type: [currentDoc.type],
@@ -71,12 +70,8 @@ export class ApplicationDocumentFormComponent implements OnInit {
         secrecy: [currentDoc.secrecy],
         state: [currentDoc.state],
         body: [currentDoc.body, [Validators.required, Validators.maxLength(2000)]],
-        user: _fb.group(
-          {}
-        ),
-        signatures: _fb.array([]
-        ),
-        executive: [currentDoc.executive]
+        signatures: _fb.array(currentDoc.signatures),
+
       }
     );
   }
@@ -84,13 +79,10 @@ export class ApplicationDocumentFormComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this._user.getCurrentUser();
     this.currentDoc.executive = this.currentUser;
+    this.setCanEdit();
 
     if (!this.canEdit) {
       this.documentFormGroup.disable();
-    }
-    if (this.canEdit && this.currentUser.userGroup.name === UserGroupRole.EDITOR) {
-      this.documentFormGroup.controls.state.setValue(ApplicationDocumentState.PROCESSING);
-      this.currentDoc.state = ApplicationDocumentState[ApplicationDocumentState.PROCESSING];
     }
 
     this.checkPermissions();
@@ -140,16 +132,28 @@ export class ApplicationDocumentFormComponent implements OnInit {
       }
     }
   }
+
+  setCanEdit = () => {
+    if (this.currentDoc.state === ApplicationDocumentState.REJECTED
+      || this.currentDoc.state === ApplicationDocumentState.ACCEPTED) {
+      this.canEdit = false;
+    }
+
+    if (this.currentDoc.executive.userGroup.name === UserGroupRole.INITIATOR
+      && this.currentDoc.state !== ApplicationDocumentState.CREATED) {
+      this.canEdit = false;
+    }
+
+    if (this.currentDoc.executive.userGroup.name === UserGroupRole.EDITOR
+      && this.currentDoc.state !== ApplicationDocumentState.PROCESSING) {
+      this.canEdit = false;
+    }
+
+    if (this.currentDoc.executive.userGroup.name === UserGroupRole.CONFIRMER
+      && this.currentDoc.state !== ApplicationDocumentState.ON_CONFIRMATION) {
+      this.canEdit = false;
+    }
+  }
 }
 
 
-/*
- header
- type
- createDate
- priority
- scope
- secrecy
- state
- body
- user */
