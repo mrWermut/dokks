@@ -1,13 +1,22 @@
-<div style="width: 800px; height: 600px" >
+<div >
 
   <mat-dialog-content class="mat-typography">
+    <div *ngIf="canEdit" class="menu-container">
+      <div *ngIf="goWild">
+        <mat-button-toggle-group [formControl]="toggleAccept" aria-label="Font Style">
+          <mat-button-toggle color="accent"  value="ACCEPTED">ACCEPT</mat-button-toggle>
+          <mat-button-toggle value="REJECTED">REJECT</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
     <div  [appDocPriority]="currentDoc.priority" style="text-align: center"> <strong>Author: {{docAuthor}} </strong> </div>
 
     <div  style="text-align: center">
 
-      <fa-icon  *ngIf="currentDoc.state === 'CREATED'"  [icon]="faFileImport"></fa-icon>
+      <fa-icon *ngIf="currentDoc.state === applicationDocumentState.CREATED"  [icon]="faFileImport"></fa-icon>
       <fa-icon style="color: blueviolet" *ngIf="currentDoc.state === applicationDocumentState.PROCESSING"  [icon]="faEdit"></fa-icon>
-      <fa-icon style="color: blue" *ngIf="currentDoc.state === applicationDocumentState.CONFIRMED"  [icon]="faCheck"></fa-icon>
+      <fa-icon style="color: blue" *ngIf="currentDoc.state === applicationDocumentState.ACCEPTED" [icon]="faCheck"></fa-icon>
+      <fa-icon style="color: blue" *ngIf="currentDoc.state === applicationDocumentState.ON_CONFIRMATION" [icon]="faQuestionCircle"></fa-icon>
       <fa-icon style="color: crimson" *ngIf="currentDoc.state === applicationDocumentState.REJECTED"  [icon]="faTimesCircle"></fa-icon>
 
       {{currentDoc.state}}
@@ -81,20 +90,10 @@
 
   </mat-dialog-content>
   <mat-dialog-actions  >
-
-    <div class="menu-container">
-      <div *ngIf="goWild">
-        <mat-button-toggle-group [formControl]="toggleAccept" aria-label="Font Style">
-          <mat-button-toggle color="accent"  value="ACCEPTED">ACCEPT</mat-button-toggle>
-          <mat-button-toggle value="REJECTED">REJECT</mat-button-toggle>
-        </mat-button-toggle-group>
-      </div>
-      <div  class ='dummy' *ngIf="!goWild"> </div>
       <div class="pull-end">
         <button mat-button [mat-dialog-close]="true"  >Cancel</button>
         <button mat-button [disabled]="!documentFormGroup.valid" [mat-dialog-close]="true"  (click)="submit()"  >Submit</button>
       </div>
-    </div>
   </mat-dialog-actions>
 
 

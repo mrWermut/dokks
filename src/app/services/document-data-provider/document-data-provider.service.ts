@@ -1,7 +1,7 @@
 /* tslint:disable:variable-name */
 
 /*
-* Фейковый сервис для доставки тестовых данных про документы
+* Фейковый сервис для доставки тестовых данных про документ, заодно эмулирует бекенд
 * */
 import {Injectable} from '@angular/core';
 import {UserDataPrividerService} from '../user-data-provider/user-data-privider.service';
@@ -11,7 +11,7 @@ import {
   ApplicationDocumentScope,
   ApplicationDocumentState,
   ApplicationDocumentType,
-  ApplicationDocumentSecrecy
+  ApplicationDocumentSecrecy, UserGroupRole
 } from '../../shared/models/enums';
 import {Observable, of, Subject} from 'rxjs';
 
@@ -62,13 +62,30 @@ export class DocumentDataProvider {
 
   postDocument = (doc: ApplicationDocument) => {
     const index = this._documents.map(el => el.id).indexOf(doc.id);
+    const updatedDoc = this.updateSates(doc);
     if (index > -1) {
-      this._documents[index] = doc;
+      this._documents[index] = updatedDoc;
     } else {
-      this._documents.push(doc);
+      this._documents.push(updatedDoc);
     }
 
-    this.newDocumentIssued$.next(doc);
+    this.newDocumentIssued$.next(updatedDoc);
+  }
+
+  private updateSates = (doc: ApplicationDocument): ApplicationDocument => {
+    const userRole = doc.executive.userGroup.name;
+    const docState = doc.state;
+
+    if (userRole === UserGroupRole.INITIATOR &&
+       docState === ApplicationDocumentState.CREATED) {
+       doc.state = ApplicationDocumentState.PROCESSING;
+    }
+    if (userRole === UserGroupRole.EDITOR &&
+      docState === ApplicationDocumentState.PROCESSING) {
+      doc.state = ApplicationDocumentState.ON_CONFIRMATION;
+    }
+
+    return doc;
   }
 }
 
